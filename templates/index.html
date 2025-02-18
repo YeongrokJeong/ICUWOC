@@ -102,7 +102,7 @@
     </div>
     
     <div style="text-align: right; margin-top: 10px; font-size: 14px; font-weight: bold;">
-        developed by. RN국서라, RN정영록
+        developed by. RN정영록
     </div>
 
     <!-- QnA 섹션 -->
@@ -209,7 +209,7 @@
                 li.style.opacity = "0"; 
                 shapList.appendChild(li);
                 setTimeout(() => {
-                    typeEffect(li, `${item.Feature}이 욕창 발생에 ${item["SHAP Value"]}%만큼 기여하였습니다`, 100);
+                    typeEffect(li, `${item.Feature}이 확률 증가에 ${item["SHAP Value"]}%만큼 기여하였습니다`, 100);
                     li.style.opacity = "1"; 
                 }, 500 * (index + 1)); 
             });
