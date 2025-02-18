@@ -93,7 +93,7 @@
     </form>
 
     <div id="result" class="mt-4 p-4 bg-white shadow rounded d-none">
-        <h4 class="text-black"><span style="display: block; text-align: center; font-size: 22px;">예측 결과</span></h4>
+        <h4 class="text-black"><span style="display: block; text-align: center; font-size: 22px; font-weight: bold;">예측 결과</span></h4>
         <p style="text-align: center; font-size: 20px;">
             이 환자의 욕창 발생 확률은 <strong><span id="probability"></span></strong>입니다.
         </p>
@@ -198,14 +198,14 @@
             let shapList = document.getElementById("shap-values");
             shapList.innerHTML = "";
 
-            typeEffect(probabilityText, data.probability + "%", 100);
+            typeEffect(probabilityText, data.probability + "%", 200);
 
             data.shap_values.forEach((item,index) => {
                 let li = document.createElement("li");
-                li.innerText = `${item.Feature}이 욕창 발생에 ${item["SHAP Value"]}%만큼 기여하였습니다`;
+                li.style.opacity = "0"; 
                 shapList.appendChild(li);
                 setTimeout(() => {
-                    typeEffect(li, `${item.Feature}이 ${item["SHAP Value"]}%만큼 기여하였습니다다`, 100);
+                    typeEffect(li, `${item.Feature}이 욕창 발생에 ${item["SHAP Value"]}%만큼 기여하였습니다`, 100);
                     li.style.opacity = "1"; 
                 }, 500 * (index + 1)); 
             });
