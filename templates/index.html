@@ -93,11 +93,13 @@
     </form>
 
     <div id="result" class="mt-4 p-4 bg-white shadow rounded d-none">
-        <h4 class="text-success"><span style="display: block; text-align: center; font-size: 22px;">예측 결과</span></h4>
+        <h4 class="text-black"><span style="display: block; text-align: center; font-size: 22px;">예측 결과</span></h4>
         <p style="text-align: center; font-size: 20px;">
-            <strong>이 환자의 욕창 발생 확률은 </strong> <span id="probability"></span>%입니다.
-        </p>        <ul id="shap-values"></ul>
+            이 환자의 욕창 발생 확률은 <strong><span id="probability"></span></strong>입니다.
+        </p>
+        <ul id="shap-values" style="text-align: center; list-style: none; padding: 0;"></ul>
     </div>
+    
 
     <!-- QnA 섹션 -->
     <h3 class="text-center mt-5 text-primary"><strong>자주 묻는 질문(FAQ)</strong></h3>
@@ -203,7 +205,7 @@
                 li.innerText = `${item.Feature}이 욕창 발생에 ${item["SHAP Value"]}%만큼 기여하였습니다`;
                 shapList.appendChild(li);
                 setTimeout(() => {
-                    typeEffect(li, `${item.Feature}: ${item["SHAP Value"]}% 기여`, 100);
+                    typeEffect(li, `${item.Feature}이 ${item["SHAP Value"]}%만큼 기여하였습니다다`, 100);
                     li.style.opacity = "1"; 
                 }, 500 * (index + 1)); 
             });
