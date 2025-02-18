@@ -58,8 +58,8 @@
 <body class="bg-light">
 
 <div class="container mt-5">
-    <h2 class="text-center text-primary">욕창 발생 확률 계산기</h2>
-    <p class="text-center text-muted">입력값을 입력한 후 예측 버튼을 클릭하세요.</p>
+    <h2 class="text-center text-primary" style="font-weight: bold;">욕창 발생 확률 계산기</h2>
+    <p class="text-center text-muted">데이터값을 입력한 후 예측하기 버튼을 클릭하세요.</p>
 
     <form id="prediction-form" class="p-4 bg-white shadow rounded">
         <div class="mb-3">
@@ -70,16 +70,17 @@
         <div class="mb-3">
             <label class="form-label">실금횟수</label>
             <input type="number" step="0.1" name="feature2" class="form-control" required>
-            <small class="text-muted">1일 동안의 실금 횟수를 모두 더한 값을 입력하세요</small>
+            <small class="text-muted">1일 동안의 실금 횟수를 모두 더한 값을 입력하세요.</small>
         </div>
         <div class="mb-3">
             <label class="form-label">하지근력(0 ~ 10)</label>
             <input type="number" step="0.1" name="feature3" class="form-control" required>
-            <small class="text-muted">통합임상관찰에서 양쪽 하지근력의 더한한 0에서 10 사이의 값을 입력하세요.</small>
+            <small class="text-muted">통합임상관찰에서 양쪽 하지근력을 더한 0에서 10 사이의 값을 입력하세요.</small>
         </div>
         <div class="mb-3">
             <label class="form-label">체온</label>
             <input type="number" step="0.1" name="feature4" class="form-control" required>
+            <small class="text-muted">소수점 첫째자리까지 입력하세요. 37.0도처럼 정수인 경우에는 37만 입력해도 됩니다.</small>
         </div>
 
         <button type="submit" class="btn btn-primary w-100">예측하기</button>
@@ -100,6 +101,9 @@
         <ul id="shap-values" style="text-align: center; list-style: none; padding: 0;"></ul>
     </div>
     
+    <div style="text-align: right; margin-top: 10px; font-size: 14px; font-weight: bold;">
+        developed by. RN정영록
+    </div>
 
     <!-- QnA 섹션 -->
     <h3 class="text-center mt-5 text-primary"><strong>자주 묻는 질문(FAQ)</strong></h3>
@@ -110,7 +114,7 @@
                 <span class="icon">+</span>
             </div>
             <div class="answer">
-                이해하기 쉽게 예시를 들어보겠습니다. <br><br>헤모글로빈이 7g/dL 이하 일 때 욕창 발생 확률이 40%, 체온이 38도 이상일 때 욕창 발생 확률이 50%라고 해봅시다. 헤모글로빈 7g/dL 이면서 체온이 38도 이상인 환자의 욕창 발생 확률은 40% * 50% = 20%가 됩니다.<br>(이해를 도울 수 있도록 전체적인 느낌을 설명하기 위한 예시이므로 참고만 해주세요) <br><br>추후 업데이트에 따라 사용하는 머신러닝 알고리즘이 달라질 수 있고 각 알고리즘마다 확률을 도출하는 방식이 상이하여 일괄적으로 설명드리기 어려운 점 양해부탁드립니다. 
+                이해하기 쉽게 예시를 들어보겠습니다. <br><br>헤모글로빈이 7g/dL 이하 일 때 욕창 발생 확률이 40%, 체온이 38도 이상일 때 욕창 발생 확률이 50%라고 해봅시다. 헤모글로빈 7g/dL 이면서 체온이 38도 이상인 환자의 욕창 발생 확률은 40% * 50% = 20%가 됩니다.<br>(전체적인 느낌을 설명하기 위한 예시이므로 참고만 해주세요) <br><br>추후 업데이트에 따라 사용하는 머신러닝 알고리즘이 달라질 수 있고 각 알고리즘마다 확률을 도출하는 방식이 상이하여 일괄적으로 설명드리기 어려운 점 양해부탁드립니다. 
             </div>
         </div>
     
@@ -130,7 +134,7 @@
                 <span class="icon">+</span>
             </div>
             <div class="answer">
-                테스트 데이터 기준으로 모델의 정확도는 <strong>86.18%</strong>로 측정되었습니다. <br><br>정확도를 이해하기 위해 임계점을 알아야 합니다. 임계점이란 쉽게 말해 머신러닝 모델이 해당 환자를 욕창군으로 판단하는 최소 확률값입니다. <br><br>예를 들어, A,B,C 환자의 욕창 발생 확률이 각각 30%, 40%, 50%라고 해봅시다. 임계점을 30%로 설정하면 30% 이상의 확률을 보인 A, B, C 환자 모두 욕창군으로 분류할 것입니다. 만약 임계점을 50%로 설정한다면 C 환자만 욕창군으로 분류됩니다. <br><br>정확도는 임계점을 50%로 설정했을 때 환자를 욕창군/비욕창군으로 분류하고 몇 개나 정답이었는지를 알려주는 지표입니다. <br><br>다만, 이 지표는 모델 학습에 사용한 데이터를 기준으로 측정되었기에 실제 임상현장에서 적용했을 때는 변동 가능합니다. 
+                이 모델은 서울아산병원 중환자실에 입실한 25,000여 명의 환자 데이터를 학습하였으며 정확도는 테스트 데이터 기준으로 <strong>86.18%</strong>로 측정되었습니다. <br><br>정확도를 이해하기 위해 임계점을 알아야 합니다. 임계점이란 쉽게 말해 머신러닝 모델이 해당 환자를 욕창군으로 판단하는 최소 확률값입니다. <br><br>예를 들어, A,B,C 환자의 욕창 발생 확률이 각각 30%, 40%, 50%라고 해봅시다. 임계점을 30%로 설정하면 30% 이상의 확률을 보인 A, B, C 환자 모두 욕창군으로 분류할 것입니다. 만약 임계점을 50%로 설정한다면 C 환자만 욕창군으로 분류됩니다. <br><br>정확도는 임계점을 50%로 설정했을 때 환자를 욕창군/비욕창군으로 분류하고 몇 개나 정답이었는지를 알려주는 지표입니다. <br><br>다만, 이 지표는 모델 학습에 사용한 데이터를 기준으로 측정되었기에 실제 임상현장에서 적용했을 때는 변동 가능합니다. 
     
             </div>
         </div>
@@ -141,7 +145,7 @@
                 <span class="icon">+</span>
             </div>
             <div class="answer">
-                첫 프로토타입 모델 개발 당시 국내외 욕창을 키워드로 발간된 다수의 논문에서 p-value가 한 번이라도 유의한 결과를 보인 변수 중 AMIS 3.0에서 수집할 수 있는 것과 비교적 쉽게 수집할 수 있는 변수를 종합하여 <strong>헤모글로빈, 알부민, BMI 등 30여개의 변수</strong>를 분석하였습니다. <br><br>그러나 내부 논의를 거쳐 <strong>간호사가 직접 중재를 제공하며 욕창을 예방하는 활동에 참여할 수 있는 변수</strong>만 다시 선정하여 모델을 구축하였습니다. 최종 선정한 변수는 의식수준, 하지근력, 체온, 실금이며 모델의 정확도는 이 변수만으로 욕창을 예측했을 때 도출되었습니다.  
+                첫 프로토타입 모델 개발 당시 국내외 욕창을 키워드로 발간된 다수의 논문에서 p-value가 한 번이라도 유의한 결과를 보인 변수 중 AMIS 3.0에서 수집할 수 있는 것을 종합하여 <strong>헤모글로빈, 알부민, BMI 등 30여개의 변수</strong>를 분석하였습니다. <br><br>그러나 내부 논의를 거쳐 <strong>간호사가 직접 중재를 제공하며 욕창을 예방하는 활동에 참여할 수 있는 변수</strong>만 다시 선정하여 모델을 구축하였습니다. 최종 선정한 변수는 의식수준, 하지근력, 체온, 실금이며 모델의 정확도는 이 변수만으로 욕창을 예측했을 때 계산하였습니다.  
     
     
             </div>
@@ -153,7 +157,7 @@
                 <span class="icon">+</span>
             </div>
             <div class="answer">
-                아니요. 딥러닝은 머신러닝의 하위분야로 머신러닝보다 더 복잡한 현상을 예측하는데 최적화되어있습니다. <br><br>구체적으로 설명드리면 알파고에서 사용한 모델은 ‘인공신경망’, 이 프로젝트에서 사용한 모델은 <strong>‘Gaussian Naïve Bayes’</strong>입니다. 참고로 이 모델은 pycaret을 사용하여 수백개의 머신러닝 모델 중 가장 성능이 뛰어나 선정하였으므로 모델링에 사용하는 데이터가 변경됨에 따라 더 성능이 좋은 알고리즘으로 교체될 수 있습니다. 
+                아니요. 딥러닝은 머신러닝의 하위분야로 머신러닝보다 더 복잡한 현상을 예측하는데 최적화되어있습니다. <br><br>구체적으로 설명드리면 알파고에서 사용한 모델은 ‘인공신경망’, 이 프로젝트에서 사용한 모델은 <strong>‘Gaussian Naïve Bayes’</strong>입니다. 참고로 이 모델은 pycaret을 사용하여 수백개의 머신러닝 모델 중 가장 성능이 뛰어난 모델을 선정하였으며 추후 모델링에 사용하는 데이터가 변경됨에 따라 더 성능이 좋은 알고리즘으로 교체될 수 있습니다. 
             </div>
         </div>
     
